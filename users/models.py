@@ -9,8 +9,6 @@ class User(AbstractUser):
 
     phone = models.CharField('телефон', max_length=35, unique=True, **NULLABLE)
     avatar = models.ImageField('аватар', upload_to='users/', **NULLABLE)
-    level = models.IntegerField('уровень', default=0)
-    current_xp = models.IntegerField('текущий XP', default=0)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
