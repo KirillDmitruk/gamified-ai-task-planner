@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 NULLABLE = {'blank': True, 'null': True}
@@ -12,6 +13,7 @@ class Task(models.Model):
         (STATUS_IN_PROGRESS, 'В процессе выполнения'),
         (STATUS_DONE, 'Выполнено'),
     ]
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='task')
     title = models.CharField('название', max_length=100)
     description = models.TextField('описание', max_length=500, **NULLABLE)
     status = models.CharField('Статус', max_length=20, choices=STATUS, default=STATUS_NOT_STARTED)
