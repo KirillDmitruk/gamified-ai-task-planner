@@ -1,10 +1,17 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from rest_framework.generics import CreateAPIView
 
 from tasks.models import Task
+from tasks.serializers import TaskSerializer
+from tasks.services import create_task
 
 
-class TaskCreateView(CreateView):
-    model = Task
+class TaskCreateAPIView(CreateAPIView):
+    serializer_class = TaskSerializer
+
+    def perform_create(self, serializer):
+        create_task(title=serializer.validated_data['title'], description=serializer.validated_data['description'],
+                    user=self.request.user)
 
 
 class TaskListView(ListView):
