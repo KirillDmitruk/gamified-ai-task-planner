@@ -7,6 +7,7 @@ class UserProgress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='пользователь', related_name='userprogress')
     level = models.IntegerField('уровень', default=0)
     current_xp = models.IntegerField('текущий XP', default=0)
+    xp_for_next_lvl = models.IntegerField('XP для следующего уровня',default=100)
 
     def __str__(self):
         return f'{self.user}: {self.level} - {self.current_xp}'
